@@ -1,13 +1,15 @@
 pipeline {
-    agent any
+    agent {
+        dockerfile {
+            filename 'Dockerfile'
+            label 'my-defined-label'
+        }
+    }
 
     stages {
         stage('Build') {
             steps {
                 echo 'Building..'
-                script {
-                    docker.build registry + ":$BUILD_NUMBER"
-                }
             }
         }
         stage('Test') {
